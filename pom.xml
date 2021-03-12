@@ -45,7 +45,7 @@
       </roles>
       <timezone>Europe/Berlin</timezone>
     </developer>
-    
+
     <developer>
         <id>alemorgar4</id>
         <name>Alejandro Morales Garcia</name>
@@ -58,6 +58,19 @@
         <timezone>Europe/Berlin</timezone>
       </developer>
 
+    <developer>
+      <id>elenolcar</id>
+      <name>Elena Nold Cardona</name>
+      <email>elenolcar@alum.us.es</email>
+      <organization>gii-is-psg2</organization>
+      <organizationUrl>https://github.com/gii-is-psg2</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>Europe/Berlin</timezone>
+    </developer>
+        
+>>>>>>> 00f82c2c54a807989d842c55089515eb8b193b76
   </developers>
     
     <parent>
