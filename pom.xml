@@ -45,7 +45,29 @@
       </roles>
       <timezone>Europe/Berlin</timezone>
     </developer>
-        
+
+    <developer>
+      <id>elenolcar</id>
+      <name>Elena Nold Cardona</name>
+      <email>elenolcar@alum.us.es</email>
+      <organization>gii-is-psg2</organization>
+      <organizationUrl>https://github.com/gii-is-psg2</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>Europe/Berlin</timezone>
+    </developer>
+        <developer>
+      <id>vicdiacor</id>
+      <name>Vicente Díaz Correa</name>
+      <email>vicdiacor@alum.us.es</email>
+      <organization>gii-is-psg2</organization>
+      <organizationUrl>https://github.com/gii-is-psg2</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>Europe/Berlin</timezone>
+    </developer>
   </developers>
     
     <parent>
