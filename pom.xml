@@ -21,6 +21,19 @@
       </roles>
       <timezone>Europe/Berlin</timezone>
     </developer>
+
+    <developers>
+    <developer>
+      <id>suarez0552</id>
+      <name>Antonio José Suárez García</name>
+      <email>suareantonio71@gmail.com</email>
+      <organization>gii-is-psg2</organization>
+      <organizationUrl>https://github.com/gii-is-psg2</organizationUrl>
+      <roles>
+        <role>developer</role>
+      </roles>
+      <timezone>Europe/Berlin</timezone>
+    </developer>
         
         
   </developers>
