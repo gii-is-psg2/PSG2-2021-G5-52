@@ -7,14 +7,24 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
+@Getter
+@Setter
+@AllArgsConstructor
 public class Booking {
     
     @Column
+    @NotNull
     private LocalDate startDate; 
 
     @Column
+    @NotNull
     private LocalDate endDate;
 
     @OneToOne(cascade = CascadeType.ALL)
