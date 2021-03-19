@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Booking;
-import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.repository.BookingRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,8 +26,8 @@ public class BookingService {
 		this.bookingRepository.delete(booking);
 	}
 	
-	public List<Booking> getOwnersBookings(final Owner owner){
-		return this.bookingRepository.getOwnersBookings(owner);
+	public List<Booking> getOwnersBookings(final int ownerId){
+		return this.bookingRepository.getOwnersBookings(ownerId);
 	}
 	
 	
