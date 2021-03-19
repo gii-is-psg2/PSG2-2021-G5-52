@@ -28,7 +28,7 @@ public class Booking extends BaseEntity{
     private LocalDate endDate;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "pet")
+    @JoinColumn(name = "pet_id")
     private Pet pet;
 
 
