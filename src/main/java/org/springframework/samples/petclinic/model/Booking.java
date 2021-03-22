@@ -2,12 +2,12 @@ package org.springframework.samples.petclinic.model;
 
 import java.time.LocalDate;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.validation.constraints.NotNull;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,14 +22,14 @@ import lombok.Setter;
 public class Booking extends BaseEntity{
     
     @Column
-    @NotNull
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate startDate; 
 
     @Column
-    @NotNull
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate endDate;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
     @JoinColumn(name = "pet_id")
     private Pet pet;
 
