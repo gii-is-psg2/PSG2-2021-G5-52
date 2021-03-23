@@ -16,10 +16,15 @@
 package org.springframework.samples.petclinic.web;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Pet;
+import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.model.Vets;
 import org.springframework.samples.petclinic.service.VetService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.Map;
@@ -60,5 +65,20 @@ public class VetController {
 		vets.getVetList().addAll(this.vetService.findVets());
 		return vets;
 	}
+	 
+	@GetMapping(value = "/vets/{vetId}/delete")
+    public String deletePet(@PathVariable("vetId") int vetId, ModelMap model) {
+ 		Vet vet = this.vetService.findById(vetId);
+ 		try {
+ 			vetService.delete(vet);
+ 			model.addAttribute("message", "Vet deleted successfully!");
+
+ 		}catch(DataAccessException e) {
+ 			
+				model.addAttribute("message", "Vet could not be removed");
+ 		}
+ 		return showVetList(model);
+	}
+	
 
 }
