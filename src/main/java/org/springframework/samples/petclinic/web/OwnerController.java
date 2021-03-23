@@ -16,11 +16,14 @@
 package org.springframework.samples.petclinic.web;
 
 import java.util.Collection;
+
 import java.util.Map;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.service.AuthoritiesService;
 import org.springframework.samples.petclinic.service.OwnerService;
@@ -28,6 +31,7 @@ import org.springframework.samples.petclinic.service.VetService;
 import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -75,6 +79,23 @@ public class OwnerController {
 			return "redirect:/owners/" + owner.getId();
 		}
 	}
+	
+	@GetMapping(value="owners/delete/{ownerId}")
+	public String deleteOwner(@PathVariable("ownerId") int ownerId,ModelMap modelMap) {
+		
+		Owner owner= ownerService.findOwnerById(ownerId);
+		try {
+			ownerService.delete(owner);
+			modelMap.addAttribute("message", "Owner deleted successfully!");
+				
+		}catch(DataAccessException exception) {
+				
+				modelMap.addAttribute("message", "The owner could not be removed");
+		}
+			
+		return initFindForm(modelMap);
+	}
+	
 
 	@GetMapping(value = "/owners/find")
 	public String initFindForm(Map<String, Object> model) {

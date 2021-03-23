@@ -41,13 +41,14 @@ public class PetService {
 	private PetRepository petRepository;
 	
 	private VisitRepository visitRepository;
-	
+	private VisitService visitService;
 
 	@Autowired
 	public PetService(PetRepository petRepository,
-			VisitRepository visitRepository) {
+			VisitRepository visitRepository,VisitService visitService) {
 		this.petRepository = petRepository;
 		this.visitRepository = visitRepository;
+		this.visitService=visitService;
 	}
 
 	@Transactional(readOnly = true)
@@ -55,11 +56,28 @@ public class PetService {
 		return petRepository.findPetTypes();
 	}
 	
+	
+	
 	@Transactional
 	public void saveVisit(Visit visit) throws DataAccessException {
 		visitRepository.save(visit);
 	}
+	
+	@Transactional
+	public void delete(Pet pet) throws DataAccessException {
+		petRepository.delete(pet);
+	}
 
+
+	public void deletePetAndVisists(Pet pet) throws DataAccessException{
+		System.out.println("ENTRO DEN DELETE_PET_AND_VISITS");
+		for(Visit v:pet.getVisits()) {
+			visitService.delete(v);
+			System.out.println("Visita eliminada");
+		}
+		petRepository.delete(pet);
+		
+	}
 	@Transactional(readOnly = true)
 	public Pet findPetById(int id) throws DataAccessException {
 		return petRepository.findById(id);

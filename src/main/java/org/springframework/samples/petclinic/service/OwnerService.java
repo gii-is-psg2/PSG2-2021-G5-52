@@ -43,7 +43,10 @@ import org.springframework.util.StringUtils;
 @Service
 public class OwnerService {
 
-	private OwnerRepository ownerRepository;	
+	private OwnerRepository ownerRepository;
+	
+	@Autowired
+	private PetService petService;
 	
 	@Autowired
 	private UserService userService;
@@ -64,6 +67,24 @@ public class OwnerService {
 	@Transactional(readOnly = true)
 	public Collection<Owner> findOwnerByLastName(String lastName) throws DataAccessException {
 		return ownerRepository.findByLastName(lastName);
+	}
+	
+	@Transactional
+	public void delete(Owner owner) throws DataAccessException{
+		System.out.println("ENTRO EN EL DELETE");
+		//Remove all owner´s pets
+		for(Pet p:owner.getPets()){
+			System.out.println(p);
+			petService.deletePetAndVisists(p);
+			System.out.println("Pet eliminada");
+		}
+		//Delete owner´s user
+		userService.deleteUser(owner.getUser());
+		System.out.println("Owner eliminado");
+		//Delete owner
+		ownerRepository.delete(owner);
+		System.out.println("Usuario eliminado");
+		
 	}
 
 	@Transactional
