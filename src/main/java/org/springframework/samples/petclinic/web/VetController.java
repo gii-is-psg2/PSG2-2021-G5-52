@@ -18,6 +18,7 @@ package org.springframework.samples.petclinic.web;
 
 import java.util.Map;
 
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -27,17 +28,27 @@ import javax.validation.Valid;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.samples.petclinic.model.Specialty;
+
+import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Pet;
+
 import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.model.Vets;
 import org.springframework.samples.petclinic.service.VetService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
@@ -82,6 +93,7 @@ public class VetController {
 		vets.getVetList().addAll(this.vetService.findVets());
 		return vets;
 	}
+
 	
 	@GetMapping(value = { "/vets/new" })
 	public String createVet(Map<String, Object> model) {
@@ -136,5 +148,21 @@ public class VetController {
 			return "redirect:/vets/{vetId}";
 		}
 	}
+
+	 
+	@GetMapping(value = "/vets/{vetId}/delete")
+    public String deletePet(@PathVariable("vetId") int vetId, ModelMap model) {
+ 		Vet vet = this.vetService.findVetById(vetId);
+ 		try {
+ 			vetService.delete(vet);
+ 			model.addAttribute("message", "Vet deleted successfully!");
+
+ 		}catch(DataAccessException e) {
+ 			
+				model.addAttribute("message", "Vet could not be removed");
+ 		}
+ 		return showVetList(model);
+	}
+	
 
 }

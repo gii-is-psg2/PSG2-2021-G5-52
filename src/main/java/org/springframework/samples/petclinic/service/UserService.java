@@ -62,4 +62,11 @@ public class UserService {
 		}
 		return usuario;
 	}
+	
+	
+	@Transactional
+	public void deleteUser(User user) throws DataAccessException {
+		userRepository.delete(user);
+	}
+	
 }

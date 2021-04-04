@@ -48,6 +48,7 @@ public class VetService {
 		return vetRepository.findAll();
 	}	
 	
+
 	@Transactional(readOnly = true)	
 	public Set<Specialty> findAllSpeciality() throws DataAccessException {
 		return vetRepository.findAllSpecialties();
@@ -67,5 +68,11 @@ public class VetService {
 	public Specialty findSpecialtyByName(String name) throws DataAccessException {
 		return vetRepository.findSpecialtyByName(name);
 	}	
+
+	@Transactional
+	public void delete(Vet vet) throws DataAccessException {
+		this.vetRepository.delete(vet);
+	}
+
 
 }

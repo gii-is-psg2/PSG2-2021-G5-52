@@ -43,24 +43,42 @@ public class PetService {
 	private final PetRepository		petRepository;
 	private final VisitRepository	visitRepository;
 	private final BookingService	bookingService;
+	private VisitService visitService;
 
 	@Autowired
-	public PetService(final PetRepository petRepository, final VisitRepository visitRepository, final BookingService bookingService) {
+	public PetService(final PetRepository petRepository, final VisitRepository visitRepository, final BookingService bookingService, VisitService visitService) {
 		this.petRepository = petRepository;
 		this.visitRepository = visitRepository;
 		this.bookingService = bookingService;
+		this.visitService=visitService;
+
 	}
 
 	@Transactional(readOnly = true)
 	public Collection<PetType> findPetTypes() throws DataAccessException {
 		return this.petRepository.findPetTypes();
 	}
-
 	@Transactional
 	public void saveVisit(final Visit visit) throws DataAccessException {
 		this.visitRepository.save(visit);
 	}
+	
+	@Transactional
+	public void delete(Pet pet) throws DataAccessException {
+		petRepository.delete(pet);
+	}
 
+
+	public void deletePetAndVisists(Pet pet) throws DataAccessException{
+		
+		for(Visit v:pet.getVisits()) {
+			visitService.delete(v);
+			
+		}
+		
+		petRepository.delete(pet);
+		
+	}
 	@Transactional(readOnly = true)
 	public Pet findPetById(final int id) throws DataAccessException {
 		return this.petRepository.findById(id);
