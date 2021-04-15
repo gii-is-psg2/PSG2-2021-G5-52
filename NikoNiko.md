@@ -39,3 +39,21 @@ In the retrospective meeting, the team has a discussion about those results.
 | Day 3         |               |    :worried:            |                |                |                |                |
 | Day 4         |  :neutral_face:             |               |                |                |                |                |
 ...
+
+
+## Example:
+
+### Sprint 3: L3-Measurement 
+
+| Day           | J. A. Parejo  |
+| ------------- | ------------- |
+| 14/04/2021    |    :smiley: (Meaning that work was completed without any issues) |
+
+
+## Sprint Template
+
+| Day           | alvcorcas    | Juanito  | [Member C]     | [Member D]     | [Member E]     | [Member F]     |
+| ------------- | ------------- | -------------  | -------------  | -------------  | -------------  | -------------  |
+| 14/04/2021    | :smile:        |                |                |                |                |                |
+
+...
