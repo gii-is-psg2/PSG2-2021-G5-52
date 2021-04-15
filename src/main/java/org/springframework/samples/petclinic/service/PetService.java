@@ -20,7 +20,6 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.samples.petclinic.model.Booking;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.PetType;
 import org.springframework.samples.petclinic.model.Visit;
@@ -43,10 +42,10 @@ public class PetService {
 	private final PetRepository		petRepository;
 	private final VisitRepository	visitRepository;
 	private final BookingService	bookingService;
-	private VisitService visitService;
+	private final VisitService visitService;
 
 	@Autowired
-	public PetService(final PetRepository petRepository, final VisitRepository visitRepository, final BookingService bookingService, VisitService visitService) {
+	public PetService(final PetRepository petRepository, final VisitRepository visitRepository, final BookingService bookingService, final VisitService visitService) {
 		this.petRepository = petRepository;
 		this.visitRepository = visitRepository;
 		this.bookingService = bookingService;
@@ -64,19 +63,19 @@ public class PetService {
 	}
 	
 	@Transactional
-	public void delete(Pet pet) throws DataAccessException {
-		petRepository.delete(pet);
+	public void delete(final Pet pet) throws DataAccessException {
+		this.petRepository.delete(pet);
 	}
 
 
-	public void deletePetAndVisists(Pet pet) throws DataAccessException{
+	public void deletePetAndVisists(final Pet pet) throws DataAccessException{
 		
-		for(Visit v:pet.getVisits()) {
-			visitService.delete(v);
+		for(final Visit v:pet.getVisits()) {
+			this.visitService.delete(v);
 			
 		}
 		
-		petRepository.delete(pet);
+		this.petRepository.delete(pet);
 		
 	}
 	@Transactional(readOnly = true)
@@ -95,11 +94,6 @@ public class PetService {
 
 	public Collection<Visit> findVisitsByPetId(final int petId) {
 		return this.visitRepository.findByPetId(petId);
-	}
-
-	@Transactional
-	public void saveBooking(final Booking booking) throws DataAccessException {
-		this.bookingService.saveBooking(booking);
 	}
 
 }
