@@ -52,8 +52,8 @@ In the retrospective meeting, the team has a discussion about those results.
 
 ## Sprint Template
 
-| Day           | alvcorcas    | josgrarom  | [Member C]     | [Member D]     | [Member E]     | [Member F]     |
+| Day           | alvcorcas    | josgrarom  | antsuagar     | [Member D]     | [Member E]     | [Member F]     |
 | ------------- | ------------- | -------------  | -------------  | -------------  | -------------  | -------------  |
-| 14/04/2021    | :smiley:        |      :smiley:          |                |                |                |                |
+| 14/04/2021    | :smiley:        |      :smiley:          |      -          |                |                |                |
 
 ...
