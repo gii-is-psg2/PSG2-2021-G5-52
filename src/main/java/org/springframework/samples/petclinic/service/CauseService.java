@@ -16,7 +16,7 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
-
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -39,6 +39,12 @@ public class CauseService {
 	@Transactional
 	public Iterable<Cause> findAll(){ 
 		 return causeRepository.findAll();
+	}
+	
+	@Transactional
+	public Optional<Cause> findById(int id){
+		return causeRepository.findById(id);
+		
 	}
 	
 	@Transactional
