@@ -18,24 +18,18 @@ package org.springframework.samples.petclinic.model;
 
 
 
-import lombok.Getter;
-import lombok.Setter;
+import java.util.Collection;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
-import java.time.LocalDate;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @Setter
@@ -62,6 +56,9 @@ public class Cause extends BaseEntity {
 	@Column(name = "organization")
 	private String organization;
 
-	//Añadir @OneToMany hacia las donaciones
+	@OneToMany(mappedBy = "cause")
+	@Column(name = "donaciones")
+	private Collection<Donation> donaciones;
+	
 	
 }
