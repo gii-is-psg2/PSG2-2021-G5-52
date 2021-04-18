@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
@@ -16,11 +17,16 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Adoptions extends BaseEntity{
+@Table(name = "adoptions")
+public class Adoption extends BaseEntity{
 	
 	@OneToOne
 	@JoinColumn(name = "pet_id")
 	private Pet pet;
+	
+	@OneToOne
+	@JoinColumn(name = "owner_id", referencedColumnName = "id")
+	private Owner owner;
 	
 	@NotEmpty
 	@Column(name = "description")

@@ -1,38 +1,37 @@
 package org.springframework.samples.petclinic.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.samples.petclinic.model.Adoptions;
+import org.springframework.samples.petclinic.model.Adoption;
 import org.springframework.samples.petclinic.repository.AdoptionsRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class AdoptionsService {
+public class AdoptionService {
 
 	private final AdoptionsRepository adoptionsRepository;
 	
 	@Autowired
-	public AdoptionsService(final AdoptionsRepository adoptionsRepository) {
+	public AdoptionService(final AdoptionsRepository adoptionsRepository) {
 		super();
 		this.adoptionsRepository = adoptionsRepository;
 	}
 	
 	@Transactional
-	public void saveAdoptions(final Adoptions adoptions) {
+	public void saveAdoptions(final Adoption adoptions) {
 		this.adoptionsRepository.save(adoptions);
 	}
 	
 	@Transactional
-	public void deleteAdoptions(final Adoptions adoptions) {
+	public void deleteAdoptions(final Adoption adoptions) {
 		this.adoptionsRepository.delete(adoptions);
 	}
 	
 	@Transactional
-	public List<Adoptions> findAll() {
-		return this.adoptionsRepository.findAll;
+	public Iterable<Adoption> findAll() {
+		return this.adoptionsRepository.findAll();
 	}
 
 	@Transactional
@@ -42,7 +41,7 @@ public class AdoptionsService {
 	}
 	
 	@Transactional(readOnly = true)
-	public Optional<Adoptions> getAdoptionsById(final int adoptionsId) {
+	public Optional<Adoption> getAdoptionsById(final int adoptionsId) {
 		return this.adoptionsRepository.findById(adoptionsId);
 	}
 
