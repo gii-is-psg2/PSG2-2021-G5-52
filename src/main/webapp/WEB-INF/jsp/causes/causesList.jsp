@@ -8,7 +8,7 @@
 <petclinic:layout pageName="causes">
     <h2><fmt:message key="causes"/></h2>
 
-    <table id="ownersTable" class="table table-striped">
+    <table id="causesTable" class="table table-striped">
         <thead>
         <tr>
             <th style="width: 150px;"><fmt:message key="name"/></th>
