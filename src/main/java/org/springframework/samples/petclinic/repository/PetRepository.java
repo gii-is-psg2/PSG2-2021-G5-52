@@ -32,6 +32,9 @@ import org.springframework.samples.petclinic.model.PetType;
  */
 public interface PetRepository extends Repository<Pet, Integer> {
 	
+	@Query("SELECT p FROM Pet p where p.owner.user.username = ?1")
+	List<Pet> findAllPetsFromUsername(String username) throws DataAccessException; 
+	
 	void delete(Pet p) throws DataAccessException;
 
 	/**

@@ -17,6 +17,7 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -43,10 +44,10 @@ public class PetService {
 	private final PetRepository		petRepository;
 	private final VisitRepository	visitRepository;
 	private final BookingService	bookingService;
-	private VisitService visitService;
+	private final VisitService visitService;
 
 	@Autowired
-	public PetService(final PetRepository petRepository, final VisitRepository visitRepository, final BookingService bookingService, VisitService visitService) {
+	public PetService(final PetRepository petRepository, final VisitRepository visitRepository, final BookingService bookingService, final VisitService visitService) {
 		this.petRepository = petRepository;
 		this.visitRepository = visitRepository;
 		this.bookingService = bookingService;
@@ -64,21 +65,27 @@ public class PetService {
 	}
 	
 	@Transactional
-	public void delete(Pet pet) throws DataAccessException {
-		petRepository.delete(pet);
+	public void delete(final Pet pet) throws DataAccessException {
+		this.petRepository.delete(pet);
 	}
 
 
-	public void deletePetAndVisists(Pet pet) throws DataAccessException{
+	public void deletePetAndVisists(final Pet pet) throws DataAccessException{
 		
-		for(Visit v:pet.getVisits()) {
-			visitService.delete(v);
+		for(final Visit v:pet.getVisits()) {
+			this.visitService.delete(v);
 			
 		}
 		
-		petRepository.delete(pet);
+		this.petRepository.delete(pet);
 		
 	}
+	
+	@Transactional
+	public List<Pet> findAllPetsByUsername(final String username) throws DataAccessException {
+		return this.petRepository.findAllPetsFromUsername(username);
+	}
+	
 	@Transactional(readOnly = true)
 	public Pet findPetById(final int id) throws DataAccessException {
 		return this.petRepository.findById(id);
@@ -100,6 +107,19 @@ public class PetService {
 	@Transactional
 	public void saveBooking(final Booking booking) throws DataAccessException {
 		this.bookingService.saveBooking(booking);
+	}
+	
+	@Transactional
+	public boolean isOwnerOf(final int petId, final String username) {
+		final Pet pet = this.petRepository.findById(petId);
+		return pet.getOwner().getUser().getUsername().equals(username);
+	}
+	
+	@Transactional
+	public void setInAdoption(final int petId) {
+		final Pet pet = this.petRepository.findById(petId);
+		pet.setInAdoption(true);
+		this.petRepository.save(pet);
 	}
 
 }

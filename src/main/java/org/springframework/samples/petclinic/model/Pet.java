@@ -46,6 +46,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Table(name = "pets")
 public class Pet extends NamedEntity {
 
+	
+	public boolean isInAdoption() {
+		return this.inAdoption;
+	}
+
+	
+	public void setInAdoption(final boolean inAdoption) {
+		this.inAdoption = inAdoption;
+	}
+
 	@Column(name = "birth_date")
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private LocalDate birthDate;
@@ -53,6 +63,9 @@ public class Pet extends NamedEntity {
 	@ManyToOne
 	@JoinColumn(name = "type_id")
 	private PetType type;
+	
+	@Column(name = "in_adoption")
+	private boolean inAdoption;
 
 	@ManyToOne
 	@JoinColumn(name = "owner_id")
