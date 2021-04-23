@@ -28,5 +28,8 @@ public class Application  extends BaseEntity{
 	@ManyToOne
 	@JoinColumn(name = "owner_id")
 	private Owner owner;
+	
+	@Column(name = "closed")
+	private boolean closed;
 
 }

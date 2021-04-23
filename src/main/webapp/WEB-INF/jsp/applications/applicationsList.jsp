@@ -13,11 +13,6 @@
     </spring:url>
     <a class="btn btn-default" href="${fn:escapeXml(adoptionsUrl)}"><span class="glyphicon glyphicon-plus"></span> <fmt:message key="putUpForAdoption"/></a>    
     </td>
-    <td>	
-   	<spring:url value="/applications/createApplicationForm" var="applicationsUrl">
-    </spring:url>
-    <a class="btn btn-default" href="${fn:escapeXml(applicationsUrl)}"><span class="glyphicon glyphicon-plus"></span> <fmt:message key="myApplications"/></a>    
-    </td>
     <br> </br>
     <table class="table table-striped">
          <tr>

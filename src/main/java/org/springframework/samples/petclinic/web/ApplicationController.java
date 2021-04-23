@@ -12,7 +12,6 @@ import org.springframework.samples.petclinic.service.AdoptionService;
 import org.springframework.samples.petclinic.service.ApplicationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -32,14 +31,10 @@ public class ApplicationController {
 	}
 
 	
-	@GetMapping(value = { "/applications/new/{adoptionId}" })
-	public String createApplications(final Map<String, Object> model, @PathVariable("adoptionId") final Integer idAdoption) {
-		final Application application= new Application();
-		final Adoption adoption= this.adoptionService.findById(idAdoption).get();
-		application.setAdoption(adoption);
-		model.put("application", application);
-		return "applications/createApplicationForm";
-	}
+//	@GetMapping(value = { "/applications/createApplicationForm" })
+//	public String createApplication(final Map<String, Object> model, @PathVariable("adoptionId") final Integer idAdoption) {
+//		
+//	}
 	
 	@PostMapping(value = "/applications/new/{adoptionId}")
 	public String processCreationForm(@Valid final Application application,final BindingResult result,@PathVariable("adoptionId") final Integer idAdoption,final Principal p,final Map<String, Object> model) {
