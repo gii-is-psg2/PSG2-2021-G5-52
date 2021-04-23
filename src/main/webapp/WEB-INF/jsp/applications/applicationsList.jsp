@@ -34,11 +34,11 @@
 	         <spring:url value="/adoptions/petsForAdoption" var="newAdoptionUrl">
 	               <spring:param name="applicationId" value="${application.id}"/>
 	         </spring:url>
-	         <a href="${fn:escapeXml(newAdoptionUrl)}"><fmt:message key="accept"/></a>
+	         <a href="${fn:escapeXml(newAdoptionUrl)}"><span class="glyphicon glyphicon-ok"></span><fmt:message key="accept"/></a>
 	         <spring:url value="/adoptions/petsForAdoption" var="newAdoptionUrl">
 	               <spring:param name="applicationId" value="${application.id}"/>
 	         </spring:url>
-	         <a href="${fn:escapeXml(newAdoptionUrl)}"><fmt:message key="reject"/></a>
+	         <a href="${fn:escapeXml(newAdoptionUrl)}"><span class="glyphicon glyphicon-remove"></span><fmt:message key="reject"/></a>
 	         </td>
          </tr>
          </c:forEach>
