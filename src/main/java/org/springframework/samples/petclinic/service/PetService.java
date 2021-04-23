@@ -120,9 +120,9 @@ public class PetService {
 	}
 	
 	@Transactional
-	public List<Pet> findPetsForAdoption(){
+	public List<Pet> findPetsForAdoption(String username){
 		
-		return this.petRepository.findPetsForAdoption();
+		return this.petRepository.findPetsForAdoption(username);
 	}
 	
 	@Transactional

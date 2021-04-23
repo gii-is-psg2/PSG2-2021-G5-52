@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.web;
 
 import java.security.Principal;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
@@ -12,8 +13,11 @@ import org.springframework.samples.petclinic.service.AdoptionService;
 import org.springframework.samples.petclinic.service.ApplicationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import antlr.collections.List;
 
 @Controller
 public class ApplicationController {
@@ -29,12 +33,21 @@ public class ApplicationController {
 		this.adoptionService=adoptionService;
 		this.adoptionController=adoptionController;
 	}
-
 	
-//	@GetMapping(value = { "/applications/createApplicationForm" })
-//	public String createApplication(final Map<String, Object> model, @PathVariable("adoptionId") final Integer idAdoption) {
-//		
-//	}
+	@GetMapping(value = { "/applications/createApplicationForm" })
+	public String createApplication(final Map<String, Object> model, @PathVariable("adoptionId") final Integer idAdoption) {
+		final Application application = new Application();
+		final Adoption adoption = this.adoptionService.findById(idAdoption).get();
+		application.setAdoption(adoption);
+		model.put("application", application);
+		return "applications/createApplicationForm";
+	}
+	
+	@GetMapping(value = { "/applications/applicationsList" })
+    public String listOfApplications(final Map<String, Object> model) {
+		model.put("applicationList", adoptionService.findAll());
+		return "/applications/applicationsList";
+    }
 	
 	@PostMapping(value = "/applications/new/{adoptionId}")
 	public String processCreationForm(@Valid final Application application,final BindingResult result,@PathVariable("adoptionId") final Integer idAdoption,final Principal p,final Map<String, Object> model) {
@@ -50,7 +63,7 @@ public class ApplicationController {
 		else {
 				this.applicationService.newApplication(p, application);
 			
-			return this.adoptionController.showPetsForAdoptionList(model);
+			return this.adoptionController.showPetsForAdoptionList(model, p);
 		}
 	}
 

@@ -38,8 +38,8 @@ public interface PetRepository extends Repository<Pet, Integer> {
 	void delete(Pet p) throws DataAccessException;
 	
 	
-	@Query("SELECT p FROM Pet p where p.inAdoption = true")
-	List<Pet> findPetsForAdoption() throws DataAccessException;
+	@Query("SELECT p FROM Pet p where p.inAdoption = true AND p.owner.user.username != ?1")
+	List<Pet> findPetsForAdoption(String username) throws DataAccessException;
 	
 	
 

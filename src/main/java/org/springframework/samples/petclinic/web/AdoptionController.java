@@ -33,8 +33,8 @@ public class AdoptionController {
 	}
 
 	@GetMapping(value = { "/adoptions" })
-	public String showPetsForAdoptionList(final Map<String, Object> model) {
-		List<Pet> petsForAdoption= this.petService.findPetsForAdoption();
+	public String showPetsForAdoptionList(final Map<String, Object> model, Principal p) {
+		List<Pet> petsForAdoption= this.petService.findPetsForAdoption(p.getName());
 		model.put("pets", petsForAdoption);
 		
 		return "adoptions/petsForAdoption";
@@ -57,7 +57,7 @@ public class AdoptionController {
 		} else {
 			model.put("message", "No puedes dar en adopcion una mascota que no es tuya");
 		}
-		return this.showPetsForAdoptionList(model);
+		return this.showPetsForAdoptionList(model, p);
 	}
 
 	@GetMapping("/adoptions/{adoptionId}")
