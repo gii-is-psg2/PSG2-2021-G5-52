@@ -14,7 +14,7 @@
     <a class="btn btn-default" href="${fn:escapeXml(adoptionsUrl)}"><span class="glyphicon glyphicon-plus"></span> <fmt:message key="putUpForAdoption"/></a>    
     </td>
     <td>	
-   	<spring:url value="/applications/createApplicationForm" var="applicationsUrl">
+   	<spring:url value="/applications/applicationsList" var="applicationsUrl">
     </spring:url>
     <a class="btn btn-default" href="${fn:escapeXml(applicationsUrl)}"><span class="glyphicon glyphicon-plus"></span> <fmt:message key="myApplications"/></a>    
     </td>
@@ -41,10 +41,10 @@
 	         <c:out value="${pet.type.name}"/>
 	         </td>
 	         <td>
-	         <spring:url value="/adoptions/new/{petId}" var="newAdoptionUrl">
+	         <spring:url value="/applications/createApplicationForm" var="applicationsUrl">
 	               <spring:param name="petId" value="${pet.id}"/>
 	         </spring:url>
-	         <a href="${fn:escapeXml(newAdoptionUrl)}"><fmt:message key="newAdoption"/></a>
+	         <a href="${fn:escapeXml(applicationsUrl)}"><fmt:message key="adopt"/></a>
 	         </td>
          </tr>
          </c:forEach>

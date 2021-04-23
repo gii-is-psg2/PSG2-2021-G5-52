@@ -6,40 +6,39 @@
 <%@ taglib prefix="petclinic" tagdir="/WEB-INF/tags" %>
 
 <petclinic:layout pageName="adoptions">
-    <h2><fmt:message key="adoptions"/></h2>
+    <h2><fmt:message key="myAdoptionsApplications"/></h2>
     
-    <td>	
-   	<spring:url value="/adoptions/selectPets" var="adoptionsUrl">
-    </spring:url>
-    <a class="btn btn-default" href="${fn:escapeXml(adoptionsUrl)}"><span class="glyphicon glyphicon-plus"></span> <fmt:message key="putUpForAdoption"/></a>    
-    </td>
-    <br> </br>
+   
     <table class="table table-striped">
          <tr>
           
+            <th><fmt:message key="owner"/></th>
             <th><fmt:message key="name"/></th>
-            <th><fmt:message key="birthDate"/></th>
-            <th><fmt:message key="type"/></th>
-            <th><fmt:message key="newAdoption"/></th>
+            <th><fmt:message key="description"/></th>
+            <th><fmt:message key="acceptOrReject"/></th>
  		
         </tr>
         <tr>
-	         <c:forEach var="pet" items="${pets}">
+	         <c:forEach var="application" items="${applications}">
 	         
 	         <td>
-	         <c:out value="${pet.name}"/>
+	         <c:out value="${application.owner}"/>
 	         </td>
 	          <td>
-	         <petclinic:localDate date="${pet.birthDate}" pattern="yyyy-MM-dd"/>
+	         <c:out value="${application.adoption.pet.name}"/>
 	         </td>
 	         <td>
-	         <c:out value="${pet.type.name}"/>
+	         <c:out value="${application.description}"/>
 	         </td>
 	         <td>
-	         <spring:url value="/adoptions/new/{petId}" var="newAdoptionUrl">
-	               <spring:param name="petId" value="${pet.id}"/>
+	         <spring:url value="/adoptions/petsForAdoption" var="newAdoptionUrl">
+	               <spring:param name="applicationId" value="${application.id}"/>
 	         </spring:url>
-	         <a href="${fn:escapeXml(newAdoptionUrl)}"><fmt:message key="newAdoption"/></a>
+	         <a href="${fn:escapeXml(newAdoptionUrl)}"><fmt:message key="accept"/></a>
+	         <spring:url value="/adoptions/petsForAdoption" var="newAdoptionUrl">
+	               <spring:param name="applicationId" value="${application.id}"/>
+	         </spring:url>
+	         <a href="${fn:escapeXml(newAdoptionUrl)}"><fmt:message key="reject"/></a>
 	         </td>
          </tr>
          </c:forEach>
