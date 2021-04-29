@@ -36,29 +36,29 @@ public class BookingService {
 			throw new BookingSavingException("La fecha de inicio debe ser anterior a la fecha de fin");
 
 		if (newStartDate.compareTo(LocalDate.now()) < 0 || newEndDate.compareTo(LocalDate.now()) < 0)
-			throw new BookingSavingException("La reserva debe ser para días posteriores");
-
-		boolean existsConcurrency = false;
+			throw new BookingSavingException("La reserva debe ser para días posteriores al día de hoy");
 
 		for (final Booking old : oldBookings) {
 
 			final LocalDate oldStartDate = old.getStartDate();
 			final LocalDate oldEndDate = old.getEndDate();
 
-			existsConcurrency = (oldStartDate.compareTo(newStartDate) <= 0 
-							&& oldEndDate.compareTo(newStartDate) >= 0) 
-				
-						|| (oldStartDate.compareTo(newEndDate) <= 0 
-							&& oldEndDate.compareTo(newEndDate) >= 0)
-						
-						|| (newStartDate.compareTo(oldStartDate) <= 0 
-							&& newEndDate.compareTo(oldStartDate) >= 0) 
-						
-						|| (newStartDate.compareTo(oldEndDate) <= 0 
-							&& newEndDate.compareTo(oldEndDate) >= 0);
+			if ((oldStartDate.compareTo(newStartDate) <= 0 && oldEndDate.compareTo(newStartDate) >= 0)) {
+				throw new BookingSavingException("La fecha de inicio de la nueva reserva está dentro de otra reserva");
+			}
 
-			if (existsConcurrency)
-				throw new BookingSavingException("Concurrencia de fechas, intente otras distintas");
+			if ((oldStartDate.compareTo(newEndDate) <= 0 && oldEndDate.compareTo(newEndDate) >= 0)) {
+				throw new BookingSavingException("La fecha de fin de la nueva reserva está dentro de otra reserva");
+			}
+
+			if ((newStartDate.compareTo(oldStartDate) <= 0 && newEndDate.compareTo(oldStartDate) >= 0)) {
+				throw new BookingSavingException("La fecha de inicio de otra reserva está dentro de la nueva reserva");
+			}
+
+			if ((newStartDate.compareTo(oldEndDate) <= 0 && newEndDate.compareTo(oldEndDate) >= 0)) {
+				throw new BookingSavingException("La fecha de fin de otra reserva está dentro de la nueva reserva");
+			}
+
 		}
 
 		this.bookingRepository.save(booking);
