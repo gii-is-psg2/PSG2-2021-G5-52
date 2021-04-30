@@ -53,17 +53,17 @@ In the retrospective meeting, the team has a discussion about those results.
 
 ## Sprint Template
 
-| Day           | alvcorcas    | josgrarom  | antsuagar     | elenolcar     | vicdiacor    | [Member F]     |
+| Day           | alvcorcas    | josgrarom  | antsuagar     | elenolcar     | vicdiacor    | alemorgar4     |
 | ------------- | ------------- | -------------  | -------------  | -------------  | -------------  | -------------  |
-| 14/04/2021    | :smiley:        |      :smiley:          |      -          |       -         |      -          |                |
-| 15/04/2021    | -        |      -          |      -          |                |           -     |               |
-| 16/04/2021    | -        |      -          |        :worried:       |    :smiley:            |   :smiley:              |                |
+| 14/04/2021    | :smiley:        |      :smiley:          |      -          |       -         |      -          |      -          |
+| 15/04/2021    | -        |      -          |      -          |                |           -     |       -        |
+| 16/04/2021    | -        |      -          |        :worried:       |    :smiley:            |   :smiley:              |        :smiley:         |
 | 17/04/2021    | -        |      -          |        -       |   -           |   -             |                |
-| 18/04/2021    | -        |      -          |       :smiley:      |    :smiley:          |   -           |                |
+| 18/04/2021    | -        |      -          |       :smiley:      |    :smiley:          |   -           |       :smiley:          |
 | 19/04/2021    | -        |      -          |       -    |   -         |   -           |       -         |
 | 20/04/2021    | -        |      -          |       -    |   -         |   -           |       -         |
 | 21/04/2021    | -        |      -          |       -    |   -         |   -           |       -         |
-| 22/04/2021    | :smile:         |      :smiley:         |       :smiley:      |    :smiley:          |   :smiley:          |                |
+| 22/04/2021    | :smile:         |      :smiley:         |       :smiley:      |    :smiley:          |   :smiley:          |     :smiley:           |
 | 23/04/2021    | -        |      :smiley:          |       -    |   -         |   -           |       -         |
 
 ...
