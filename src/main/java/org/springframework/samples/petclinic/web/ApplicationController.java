@@ -11,6 +11,7 @@ import org.springframework.samples.petclinic.model.Application;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.service.ApplicationService;
 import org.springframework.samples.petclinic.service.PetService;
+import org.springframework.samples.petclinic.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,13 +26,15 @@ public class ApplicationController {
 	private final ApplicationService applicationService;
 	private final PetService petService;
 	private final AdoptionController adoptionController;
+	private final UserService userService;
 	
 	
 	@Autowired
-	public ApplicationController(final ApplicationService applicationService,final AdoptionController adoptionController, final PetService petService) {
+	public ApplicationController(final ApplicationService applicationService,final AdoptionController adoptionController, final PetService petService,UserService userService) {
 		this.applicationService = applicationService;
 		this.adoptionController=adoptionController;
 		this.petService=petService;
+		this.userService=userService;
 	}
 	
 	@GetMapping(value = { "/applications/createApplicationForm/{petId}" })
@@ -60,9 +63,12 @@ public class ApplicationController {
 			return "applications/createApplicationForm";
 			}
 		else {
-			if(!petService.isOwnerOf(idpet, p.getName()) && pet.isInAdoption()) {
+			if(!userService.userHaveRol(p.getName(), "owner")){
+				model.put("message", "No puedes adoptar una mascota si no tienes un rol de propietario");
+
+			}else if(!petService.isOwnerOf(idpet, p.getName()) && pet.isInAdoption()) {
 				applicationService.newApplication(p, application);
-			}else {
+			}else{
 				model.put("message", "No puedes adoptar una mascota propia o que no este en adopcion");
 			}
 			
