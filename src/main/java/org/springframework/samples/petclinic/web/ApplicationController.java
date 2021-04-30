@@ -2,6 +2,7 @@ package org.springframework.samples.petclinic.web;
 
 import java.security.Principal;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -46,8 +47,8 @@ public class ApplicationController {
 	}
 	
 	@GetMapping(value = { "/applications/applicationsList" })
-    public String listOfApplications(final Map<String, Object> model) {
-		final List<Application> applications = this.applicationService.findNotClosed();
+    public String listOfApplications(final Map<String, Object> model, Principal p) {
+		final List<Application> applications = this.applicationService.findApplicationsToMeNotClosed(p.getName());
 		model.put("applicationList", applications);
 		return "/applications/applicationsList";
     }
@@ -74,6 +75,49 @@ public class ApplicationController {
 			
 			return this.adoptionController.showPetsForAdoptionList(model, p);
 		}
+	}
+	
+	@GetMapping(value = { "/applications/reject/{applicationId}" })
+	public String rejectApplication(final Map<String, Object> model, @PathVariable("applicationId") final Integer applicationId,Principal p) {
+		
+		Optional<Application> application= applicationService.findById(applicationId);
+		if(application.isPresent()) {
+			
+			if(applicationService.isApplicationToMe(p.getName(),application.get())) {
+				applicationService.rejectApplication(application.get());
+				model.put("message","Solicitud rechazada correctamente");
+
+			}else {
+				model.put("message","No puedes rechazar una petición que no va dirigida a ti");
+			}
+			
+		}else {
+			model.put("message", "No puedes rechazar una petición que no existe");
+			
+		}	
+		return this.listOfApplications(model, p);
+	}
+	@GetMapping(value = { "/applications/acept/{applicationId}" })
+	public String aceptApplication(final Map<String, Object> model, @PathVariable("applicationId") final Integer applicationId,Principal p) {
+		
+		Optional<Application> application= applicationService.findById(applicationId);
+		
+		if(application.isPresent()) {
+			
+			if(applicationService.isApplicationToMe(p.getName(),application.get())) {
+				applicationService.aceptApplication(application.get());
+				
+				model.put("message","Solicitud aceptada correctamente");
+
+			}else {
+				model.put("message","No puedes aceptar una petición que no va dirigida a ti");
+			}
+			
+		}else {
+			model.put("message", "No puedes aceptar una petición que no existe");
+			
+		}
+		return this.listOfApplications(model, p);
 	}
 
 }

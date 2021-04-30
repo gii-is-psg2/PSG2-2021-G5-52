@@ -54,6 +54,8 @@ public class AdoptionController {
 		
 		if(this.petService.isOwnerOf(petId, p.getName())) {
 			this.petService.setInAdoption(petId);
+			model.put("message", "Has dado en adopción una mascota correctamente, otros usuarios podrán verlo y  solicitar su adopción");
+
 		} else {
 			model.put("message", "No puedes dar en adopcion una mascota que no es tuya");
 		}

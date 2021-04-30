@@ -19,6 +19,9 @@
     <a class="btn btn-default" href="${fn:escapeXml(applicationsUrl)}"><span class="glyphicon glyphicon-plus"></span> <fmt:message key="myApplications"/></a>    
     </td>
     <br> </br>
+    
+    <h2><fmt:message key="listPetsForAdoption"/></h2>
+    
     <table class="table table-striped">
          <tr>
           
