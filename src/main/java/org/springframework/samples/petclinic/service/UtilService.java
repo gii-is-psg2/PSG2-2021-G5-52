@@ -1,14 +1,10 @@
 package org.springframework.samples.petclinic.service;
 
 import java.time.LocalDate;
-
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UtilService {
 	@Transactional
 	public double aproximarNumero(Double numero) { //Aproxima un  Double a 2 decimales
-		double numeroAproximado=(double)Math.round(numero * 100d) / 100d;
+		double numeroAproximado=Math.round(numero * 100d) / 100d;
 		return numeroAproximado;
 	}
 	

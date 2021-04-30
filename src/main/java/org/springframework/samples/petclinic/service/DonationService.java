@@ -16,12 +16,9 @@
 package org.springframework.samples.petclinic.service;
 
 import java.security.Principal;
-import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
-import org.springframework.samples.petclinic.model.Cause;
 import org.springframework.samples.petclinic.model.Donation;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.repository.DonationRepository;
@@ -35,13 +32,11 @@ public class DonationService {
 	
 	private  DonationRepository donationRepository;
 	private OwnerService ownerService;
-	private CauseService causeService;
 
 	@Autowired
-	public DonationService(DonationRepository donationRepository, OwnerService ownerService,CauseService causeService) {
+	public DonationService(DonationRepository donationRepository, OwnerService ownerService) {
 		this.donationRepository = donationRepository;
 		this.ownerService=ownerService;
-		this.causeService=causeService;
 		
 	}
 
@@ -66,7 +61,7 @@ public class DonationService {
 	@Transactional
 	public void save(Donation donation) {
 		
-		donationRepository.save(donation);
+		this.donationRepository.save(donation);
 		
 	}
 

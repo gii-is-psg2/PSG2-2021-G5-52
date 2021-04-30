@@ -10,17 +10,23 @@
     <jsp:attribute name="customScript">
         <script>
             $(function () {
-                $("#date").datepicker({dateFormat: 'yy/mm/dd'});
+                $("#date").datepicker({
+                	dateFormat: 'yy/mm/dd',
+                	minDate: 0});
             });
         </script>
         <script>
             $(function () {
-                $("#startDate").datepicker({dateFormat: 'yy/mm/dd'});
+                $("#startDate").datepicker({
+                	dateFormat: 'yy/mm/dd',
+                	minDate: 0});
             });
         </script>
         <script>
             $(function () {
-                $("#endDate").datepicker({dateFormat: 'yy/mm/dd'});
+                $("#endDate").datepicker({
+                	dateFormat: 'yy/mm/dd',
+                	minDate: 0});
             });
         </script>
     </jsp:attribute>
