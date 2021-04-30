@@ -17,6 +17,7 @@
 package org.springframework.samples.petclinic.service;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -41,10 +42,18 @@ public class PetService {
 
 	private final PetRepository		petRepository;
 	private final VisitRepository	visitRepository;
+<<<<<<< HEAD
 	private final VisitService visitService;
 
 	@Autowired
 	public PetService(final PetRepository petRepository, final VisitRepository visitRepository, final VisitService visitService) {
+=======
+	private final BookingService	bookingService;
+	private final VisitService visitService;
+
+	@Autowired
+	public PetService(final PetRepository petRepository, final VisitRepository visitRepository, final BookingService bookingService, final VisitService visitService) {
+>>>>>>> 5d2015469ecb28fcc199ef61898a7758432e70e5
 		this.petRepository = petRepository;
 		this.visitRepository = visitRepository;
 		this.visitService=visitService;
@@ -76,6 +85,9 @@ public class PetService {
 		this.petRepository.delete(pet);
 		
 	}
+	
+	
+	
 	@Transactional(readOnly = true)
 	public Pet findPetById(final int id) throws DataAccessException {
 		return this.petRepository.findById(id);
@@ -94,4 +106,38 @@ public class PetService {
 		return this.visitRepository.findByPetId(petId);
 	}
 
+<<<<<<< HEAD
+=======
+	@Transactional
+	public void saveBooking(final Booking booking) throws DataAccessException {
+		this.bookingService.saveBooking(booking);
+	}
+	
+	@Transactional
+	public boolean isOwnerOf(final int petId, final String username) {
+		final Pet pet = this.petRepository.findById(petId);
+		return pet.getOwner().getUser().getUsername().equals(username);
+	}
+	
+	@Transactional
+	public void setInAdoption(final int petId) {
+		final Pet pet = this.petRepository.findById(petId);
+		pet.setInAdoption(true);
+		this.petRepository.save(pet);
+	}
+	
+	@Transactional
+	public List<Pet> findPetsForAdoption(String username){
+		
+		return this.petRepository.findPetsForAdoption(username);
+	}
+	
+	@Transactional
+	public List<Pet> findPetsNotAdoptionByUsername(String username){
+		
+		return this.petRepository.findPetsNotAdoptionByUsername(username);
+	}
+
+
+>>>>>>> 5d2015469ecb28fcc199ef61898a7758432e70e5
 }
