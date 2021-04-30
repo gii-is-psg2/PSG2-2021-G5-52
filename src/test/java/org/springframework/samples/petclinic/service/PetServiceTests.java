@@ -74,7 +74,7 @@ class PetServiceTests {
 
 	@Test
 	void shouldFindPetWithCorrectId() {
-		Pet pet7 = this.petService.findPetById(7);
+		final Pet pet7 = this.petService.findPetById(7);
 		org.assertj.core.api.Assertions.assertThat(pet7.getName()).startsWith("Samantha");
 		org.assertj.core.api.Assertions.assertThat(pet7.getOwner().getFirstName()).isEqualTo("Jean");
 
@@ -82,11 +82,11 @@ class PetServiceTests {
 
 	@Test
 	void shouldFindAllPetTypes() {
-		Collection<PetType> petTypes = this.petService.findPetTypes();
+		final Collection<PetType> petTypes = this.petService.findPetTypes();
 
-		PetType petType1 = EntityUtils.getById(petTypes, PetType.class, 1);
+		final PetType petType1 = EntityUtils.getById(petTypes, PetType.class, 1);
 		org.assertj.core.api.Assertions.assertThat(petType1.getName()).isEqualTo("cat");
-		PetType petType4 = EntityUtils.getById(petTypes, PetType.class, 4);
+		final PetType petType4 = EntityUtils.getById(petTypes, PetType.class, 4);
 		org.assertj.core.api.Assertions.assertThat(petType4.getName()).isEqualTo("snake");
 	}
 
@@ -94,11 +94,11 @@ class PetServiceTests {
 	@Transactional
 	public void shouldInsertPetIntoDatabaseAndGenerateId() {
 		Owner owner6 = this.ownerService.findOwnerById(6);
-		int found = owner6.getPets().size();
+		final int found = owner6.getPets().size();
 
-		Pet pet = new Pet();
+		final Pet pet = new Pet();
 		pet.setName("bowser");
-		Collection<PetType> types = this.petService.findPetTypes();
+		final Collection<PetType> types = this.petService.findPetTypes();
 		pet.setType(EntityUtils.getById(types, PetType.class, 2));
 		pet.setBirthDate(LocalDate.now());
 		owner6.addPet(pet);
@@ -106,7 +106,7 @@ class PetServiceTests {
 
             try {
                 this.petService.savePet(pet);
-            } catch (DuplicatedPetNameException ex) {
+            } catch (final DuplicatedPetNameException ex) {
                 Logger.getLogger(PetServiceTests.class.getName()).log(Level.SEVERE, null, ex);
             }
 		this.ownerService.saveOwner(owner6);
@@ -120,21 +120,21 @@ class PetServiceTests {
 	@Test
 	@Transactional
 	public void shouldThrowExceptionInsertingPetsWithTheSameName() {
-		Owner owner6 = this.ownerService.findOwnerById(6);
-		Pet pet = new Pet();
+		final Owner owner6 = this.ownerService.findOwnerById(6);
+		final Pet pet = new Pet();
 		pet.setName("wario");
-		Collection<PetType> types = this.petService.findPetTypes();
+		final Collection<PetType> types = this.petService.findPetTypes();
 		pet.setType(EntityUtils.getById(types, PetType.class, 2));
 		pet.setBirthDate(LocalDate.now());
 		owner6.addPet(pet);
 		try {
 			this.petService.savePet(pet);		
-		} catch (DuplicatedPetNameException e) {
+		} catch (final DuplicatedPetNameException e) {
 			// The pet already exists!
 			e.printStackTrace();
 		}
 		
-		Pet anotherPetWithTheSameName = new Pet();		
+		final Pet anotherPetWithTheSameName = new Pet();		
 		anotherPetWithTheSameName.setName("wario");
 		anotherPetWithTheSameName.setType(EntityUtils.getById(types, PetType.class, 1));
 		anotherPetWithTheSameName.setBirthDate(LocalDate.now().minusWeeks(2));
@@ -148,9 +148,9 @@ class PetServiceTests {
 	@Transactional
 	public void shouldUpdatePetName() throws Exception {
 		Pet pet7 = this.petService.findPetById(7);
-		String oldName = pet7.getName();
+		final String oldName = pet7.getName();
 
-		String newName = oldName + "X";
+		final String newName = oldName + "X";
 		pet7.setName(newName);
 		this.petService.savePet(pet7);
 
@@ -161,15 +161,15 @@ class PetServiceTests {
 	@Test
 	@Transactional
 	public void shouldThrowExceptionUpdatingPetsWithTheSameName() {
-		Owner owner6 = this.ownerService.findOwnerById(6);
-		Pet pet = new Pet();
+		final Owner owner6 = this.ownerService.findOwnerById(6);
+		final Pet pet = new Pet();
 		pet.setName("wario");
-		Collection<PetType> types = this.petService.findPetTypes();
+		final Collection<PetType> types = this.petService.findPetTypes();
 		pet.setType(EntityUtils.getById(types, PetType.class, 2));
 		pet.setBirthDate(LocalDate.now());
 		owner6.addPet(pet);
 		
-		Pet anotherPet = new Pet();		
+		final Pet anotherPet = new Pet();		
 		anotherPet.setName("waluigi");
 		anotherPet.setType(EntityUtils.getById(types, PetType.class, 1));
 		anotherPet.setBirthDate(LocalDate.now().minusWeeks(2));
@@ -178,7 +178,7 @@ class PetServiceTests {
 		try {
 			this.petService.savePet(pet);
 			this.petService.savePet(anotherPet);
-		} catch (DuplicatedPetNameException e) {
+		} catch (final DuplicatedPetNameException e) {
 			// The pets already exists!
 			e.printStackTrace();
 		}				
@@ -193,14 +193,14 @@ class PetServiceTests {
 	@Transactional
 	public void shouldAddNewVisitForPet() {
 		Pet pet7 = this.petService.findPetById(7);
-		int found = pet7.getVisits().size();
-		Visit visit = new Visit();
+		final int found = pet7.getVisits().size();
+		final Visit visit = new Visit();
 		pet7.addVisit(visit);
 		visit.setDescription("test");
 		this.petService.saveVisit(visit);
             try {
                 this.petService.savePet(pet7);
-            } catch (DuplicatedPetNameException ex) {
+            } catch (final DuplicatedPetNameException ex) {
                 Logger.getLogger(PetServiceTests.class.getName()).log(Level.SEVERE, null, ex);
             }
 
@@ -211,9 +211,9 @@ class PetServiceTests {
 
 	@Test
 	void shouldFindVisitsByPetId() throws Exception {
-		Collection<Visit> visits = this.petService.findVisitsByPetId(7);
-		org.assertj.core.api.Assertions.assertThat(visits.size()).isEqualTo(2);
-		Visit[] visitArr = visits.toArray(new Visit[visits.size()]);
+		final Collection<Visit> visits = this.petService.findVisitsByPetId(7);
+		org.assertj.core.api.Assertions.assertThat(visits).hasSize(2);
+		final Visit[] visitArr = visits.toArray(new Visit[visits.size()]);
 		org.assertj.core.api.Assertions.assertThat(visitArr[0].getPet()).isNotNull();
 		org.assertj.core.api.Assertions.assertThat(visitArr[0].getDate()).isNotNull();
 		org.assertj.core.api.Assertions.assertThat(visitArr[0].getPet().getId()).isEqualTo(7);

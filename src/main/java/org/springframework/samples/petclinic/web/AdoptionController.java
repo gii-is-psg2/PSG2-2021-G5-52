@@ -25,8 +25,8 @@ public class AdoptionController {
 	}
 
 	@GetMapping(value = { "/adoptions" })
-	public String showPetsForAdoptionList(final Map<String, Object> model, Principal p) {
-		List<Pet> petsForAdoption= this.petService.findPetsForAdoption(p.getName());
+	public String showPetsForAdoptionList(final Map<String, Object> model, final Principal p) {
+		final List<Pet> petsForAdoption= this.petService.findPetsForAdoption(p.getName());
 		model.put("pets", petsForAdoption);
 		
 		return "adoptions/petsForAdoption";
@@ -41,7 +41,7 @@ public class AdoptionController {
 	}
 
 	@GetMapping(value = "/adoptions/pet/{petId}")
-	public String createAdoption(final Map<String, Object> model, final Principal p, @PathVariable("petId")  int petId) {
+	public String createAdoption(final Map<String, Object> model, final Principal p, @PathVariable("petId") final  int petId) {
 		
 		
 		if(this.petService.isOwnerOf(petId, p.getName())) {
@@ -56,8 +56,7 @@ public class AdoptionController {
 
 	@GetMapping("/adoptions/{adoptionId}")
 	public String showAdoption(@PathVariable("adoptionId") final int adoptionId, final Map<String, Object> model) {
-		Application adoption = new Application();
-//		adoption = this.applicationService.getAdoptionsById(adoptionId).get();
+		final Application adoption = new Application();
 		model.put("adoption", adoption);
 		return "adoptions/adoptionDetails";
 	}

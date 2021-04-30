@@ -1,3 +1,4 @@
+
 package org.springframework.samples.petclinic.web;
 
 import java.security.Principal;
@@ -18,62 +19,60 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-
 @Controller
 public class DonationController {
 
-	private final DonationService donationService;
-	private final CauseService causeService;
-	
-	
+	private final DonationService	donationService;
+	private final CauseService		causeService;
+
+	private static final String		MESSAGE	= "message";
+
+
 	@Autowired
-	public DonationController(DonationService donationService,CauseService causeService) {
+	public DonationController(final DonationService donationService, final CauseService causeService) {
 		this.donationService = donationService;
-		this.causeService=causeService;
+		this.causeService = causeService;
 	}
 
-	
-	@GetMapping(value = { "/donations/new/{causeId}" })
-	public String createCauses(Map<String, Object> model, @PathVariable("causeId") Integer idCause) {
-		Donation donation= new Donation();
-		Optional<Cause> optCause = this.causeService.findById(idCause);
-		if(optCause.isPresent()) {
+	@GetMapping(value = {
+		"/donations/new/{causeId}"
+	})
+	public String createCauses(final Map<String, Object> model, @PathVariable("causeId") final Integer idCause) {
+		final Donation donation = new Donation();
+		final Optional<Cause> optCause = this.causeService.findById(idCause);
+		if (optCause.isPresent()) {
 			donation.setCause(optCause.get());
 			model.put("donation", donation);
 			return "donations/createDonationForm";
-		}else {
-			model.put("message", "No se ha encontrado la Causa");
+		} else {
+			model.put(DonationController.MESSAGE, "No se ha encontrado la Causa");
 			return "/donations/new/" + idCause;
 		}
 	}
-	
+
 	@PostMapping(value = "/donations/new/{causeId}")
-	public String processCreationForm(@Valid Donation donation,BindingResult result,@PathVariable("causeId") Integer idCause,Principal p,Map<String, Object> model) {
-		Optional<Cause> optCause = this.causeService.findById(idCause);
-		if(optCause.isPresent()) {
+	public String processCreationForm(@Valid final Donation donation, final BindingResult result, @PathVariable("causeId") final Integer idCause, final Principal p, final Map<String, Object> model) {
+		final Optional<Cause> optCause = this.causeService.findById(idCause);
+		if (optCause.isPresent()) {
 			donation.setCause(optCause.get());
-			
 			if (result.hasErrors()) {
-				System.out.println(result.getAllErrors());
 				model.put("donation", donation);
 				return "donations/createDonationForm";
-				}
-			else {
-				
+			} else {
+
 				try {
 					this.donationService.newDonation(p, donation);
-					
-				}catch(ClosedCauseException e) {
-					model.put("message", "No puedes donar a una causa que ya ha alcanzado su objetivo");
+
+				} catch (final ClosedCauseException e) {
+					model.put(DonationController.MESSAGE, "No puedes donar a una causa que ya ha alcanzado su objetivo");
 				}
-				
+
 				return "welcome";
 			}
-		}else {
-			model.put("message", "No se ha encontrado la Causa");
+		} else {
+			model.put(DonationController.MESSAGE, "No se ha encontrado la Causa");
 			return "/donations/new/" + idCause;
 		}
 	}
-	
 
 }
