@@ -12,7 +12,9 @@ import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.service.BookingService;
 import org.springframework.samples.petclinic.service.PetService;
 import org.springframework.samples.petclinic.service.UserService;
+import org.springframework.samples.petclinic.service.exceptions.BookingSavingException;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -46,7 +48,7 @@ public class BookingController {
 	public Booking loadPetWithBooking(@PathVariable("petId") final int petId) {
 		final Pet pet = this.petService.findPetById(petId);
 		final Booking booking = new Booking();
-		pet.addBooking(booking);
+		booking.setPet(pet);
 		return booking;
 	}
 
@@ -58,11 +60,17 @@ public class BookingController {
 
 	// Spring MVC calls method loadPetWithBooking(...) before processNewBookingForm is called
 	@PostMapping(value = "/owners/{ownerId}/pets/{petId}/bookings/new")
-	public String processNewBookingForm(@Valid final Booking booking, final BindingResult result) {
+	public String processNewBookingForm(@Valid final Booking booking, final BindingResult result, final ModelMap model) {
 		if (result.hasErrors()) {
 			return "pets/createOrUpdateBookingForm";
 		} else {
-			this.petService.saveBooking(booking);
+			try {
+				this.bookingService.saveBooking(booking); 
+			} catch(final BookingSavingException e) {
+				model.addAttribute("message", e.toString());
+				return this.initNewBookingForm(booking.getPet().getId(), model);
+			}
+			
 			return "redirect:/owners/{ownerId}";
 		}
 	}
