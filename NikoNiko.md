@@ -28,6 +28,13 @@
 | 23/04/2021    |    :neutral_face: (Meaning that I feel I had to struggle, but the assigned work was fair and the day productive)| 
 | 24/04/2021    |    :fearful: (Meaning that I feel the day was non-productive)| 
 
+| Day           | alemorgar4  |
+| ------------- | ------------- |
+| 09/04/2021    |    :smiley: (Meaning that there is motivation for this new Sprint) |
+| 16/04/2021    |    :smiley: (Meaning that work was completed without any issues) |
+| 18/04/2021    |    :smile: (Meaning that there is interest in the project) |
+| 22/04/2021    |    :hourglass: (Meaning that there is less time and workload is bigger) |
+| 30/04/2021    |    :smiley: (Meaning that the sprint is going to be completed succesfully) | 
 
 ## Sprint Template
 
