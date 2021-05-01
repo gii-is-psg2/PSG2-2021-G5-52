@@ -1,4 +1,4 @@
-# Niko Niko Calendar of team X
+# Niko Niko Calendar of team L5-52
 
 
 ### Sprint 3: L5-52 Measurement 
