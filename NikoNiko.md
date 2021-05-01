@@ -1,7 +1,7 @@
 # Niko Niko Calendar of team X
 
 
-### Sprint 3: L3-Measurement 
+### Sprint 3: L5-52 Measurement 
 
 | Day           | alvcorcas  |
 | ------------- | ------------- |
