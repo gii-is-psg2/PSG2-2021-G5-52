@@ -20,6 +20,14 @@
 | 22/04/2021    |    :smile: (Meaning that I am learning, I like the work and I think I can do it without problems, but with some effort) |
 | 23/04/2021    |    :neutral_face: (Meaning that I feel I had to struggle, but the assigned work was fair and the day productive)| 
 
+| Day           | antsuagar  |
+| ------------- | ------------- |
+| 09/04/2021    |    :smiley: (Meaning that there is motivation for this new Sprint) |
+| 14/04/2021    |    :smiley: (Meaning that work was completed without any issues) |
+| 22/04/2021    |    :smile: (Meaning that I am learning, I like the work and I think I can do it without problems, but with some effort) |
+| 23/04/2021    |    :neutral_face: (Meaning that I feel I had to struggle, but the assigned work was fair and the day productive)| 
+| 24/04/2021    |    :fearful: (Meaning that I feel the day was non-productive)| 
+
 
 ## Sprint Template
 
@@ -28,7 +36,7 @@
 | 09/04/2021    | :smiley:        |      :smiley:          |       :smiley:          |      :smiley:       |      :smiley:         |     :smiley:         |
 | 14/04/2021    | :smiley:        |      :smiley:          |      -          |       -         |      -          |      -          |
 | 15/04/2021    | -        |      -          |      -          |                |           -     |       -        |
-| 16/04/2021    | -        |      -          |        :worried:       |    :smiley:            |   :smiley:              |        :smiley:         |
+| 16/04/2021    | -        |      -          |        :smile:       |    :smiley:            |   :smiley:              |        :smiley:         |
 | 17/04/2021    | -        |      -          |        -       |   -           |   -             |                |
 | 18/04/2021    | -        |      -          |       :smiley:      |    :smiley:          |   :smiley:         |       :smiley:          |
 | 19/04/2021    | -        |      -          |       -    |   -         |   -           |       -         |
