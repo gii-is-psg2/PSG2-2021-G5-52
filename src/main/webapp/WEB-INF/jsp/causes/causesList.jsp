@@ -11,7 +11,7 @@
     <td>	
    	<spring:url value="/causes/new" var="causesUrl">
     </spring:url>
-    <a class="btn btn-default" href="${fn:escapeXml(causesUrl)}"><span class="glyphicon glyphicon-plus"></span> <fmt:message key="newCauses"/></a>    
+    <a class="btn btn-default" href="${fn:escapeXml(causesUrl)}"><span class="glyphicon glyphicon-plus"></span> <fmt:message key="newCause"/></a>    
     </td>
     <br> </br>
     <table id="causesTable" class="table table-striped">
